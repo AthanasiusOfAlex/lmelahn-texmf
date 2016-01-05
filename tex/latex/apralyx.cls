@@ -146,6 +146,11 @@
 \DeclareMultiCiteCommand{\smartcites}
     [\iffootnote\textnormal\mkbibfootnote]{\smartcite}{\multicitedelim}
 
+% Specifies U.S.-style punctuation in citations.
+\DefineBibliographyExtras{english}{%
+  \uspunctuation%
+}
+
 % The following commands make \autocite available to LyX
 \let\oldcite\citep
 \let\citep\autocite

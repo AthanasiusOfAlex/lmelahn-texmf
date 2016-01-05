@@ -1,0 +1,32 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.12.16)  5 JAN 2016 17:51
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**apra.bbx
+(./apra.bbx
+LaTeX2e <2015/10/01> patch level 2
+Babel <3.9m> and hyphenation patterns for 79 languages loaded.
+./apra.bbx:4: Undefined control sequence.
+<write> File: apra.bbx \abx 
+                            @bbxid $Id: apra.bbx,v 0.99.0 2014/04/02 15:00:0...
+l.4 ....bbx,v 0.99.0 2014/04/02 15:00:00 melahn $]
+                                                  
+? 
+./apra.bbx:4: Emergency stop.
+<write> File: apra.bbx \abx 
+                            @bbxid $Id: apra.bbx,v 0.99.0 2014/04/02 15:00:0...
+l.4 ....bbx,v 0.99.0 2014/04/02 15:00:00 melahn $]
+                                                  
+End of file on the terminal!
+
+ 
+Here is how much of TeX's memory you used:
+ 7 strings out of 493054
+ 122 string characters out of 6134759
+ 53374 words of memory out of 5000000
+ 3629 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 5i,0n,3p,75b,20s stack positions out of 5000i,500n,10000p,200000b,80000s
+./apra.bbx:4:  ==> Fatal error occurred, no output PDF file produced!

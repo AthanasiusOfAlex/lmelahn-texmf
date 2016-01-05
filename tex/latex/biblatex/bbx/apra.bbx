@@ -55,6 +55,33 @@
   \printfield{edition}%
   \newunit}
 
+%% The following customizes the "inbook" and "incollection"
+%% styles, so that the "ID" appears when the author of the main
+%% work is the same as that of the smaller work.
+\newbibmacro*{maintitle+booktitle}{%
+  \ifthenelse{
+      \ifnameundef{editor}
+      \and
+      \(
+         \iffieldundef{bookauthor}
+         \or
+         \iffieldsequal{author}{bookauthor}
+      \)
+    }
+    {\textsc{Id.},\addspace}
+    {}%
+  \iffieldundef{maintitle}
+    {}
+    {\usebibmacro{maintitle}%
+     \newunit\newblock
+     \iffieldundef{volume}
+       {}
+       {\printfield{volume}%
+        \printfield{part}%
+        \setunit{\addcolon\space}}}%
+  \usebibmacro{booktitle}%
+  \newunit}
+
 % Removes the "URL:" in URLs.
 \DeclareFieldFormat{url}{\url{#1}}
 
@@ -335,8 +362,8 @@
   \newunit\newblock
   \usebibmacro{byeditor+others}%
   \newunit\newblock
-  \printfield{edition}%
-  \newunit
+  %\printfield{edition}%
+  %\newunit
   \iffieldundef{maintitle}
     {\printfield{volume}%
      \printfield{part}}
