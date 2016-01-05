@@ -1,0 +1,13 @@
+\ProvidesFile{apra.cbx}
+\RequireCitationStyle{verbose-ibid}
+
+%% Italicize "ibid"
+\renewcommand*{\mkibid}{\mkbibemph}
+
+% Forces shorthand to use ibid (comment out if undesired):
+\AtEveryCitekey{%
+  \ifthenelse{\ifciteibid\AND\NOT\iffirstonpage}
+    {\clearfield{shorthand}}
+    {}}
+
+\endinput

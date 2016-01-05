@@ -1,0 +1,25 @@
+\newcommand{\filename}{lmelahnOldFonts}
+\newcommand{\fileversion}{$Revision: 1 $}
+\newcommand{\filedate}{2015/09/28}
+\newcommand{\fileauthor}{$Author: lmelahn $}
+
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+
+\ProvidesPackage{\filename}[\filedate \fileversion %
+  : What lmelahn usually uses for fonts.]
+
+\RequirePackage{fontspec}
+
+\defaultfontfeatures{Ligatures=TeX, Numbers=OldStyle}
+\setmainfont{Linux Libertine O}
+\setsansfont[Scale=MatchLowercase]{Linux Libertine O}
+\setmonofont{Linux Biolinum O}
+
+\RequirePackage{unicode-math}
+\setmathfont{TeX Gyre Termes Math}
+
+\RequirePackage{polyglossia}
+\setdefaultlanguage[variant=us]{english}
+\setotherlanguage[variant=ancient]{greek}
+
+\sloppy

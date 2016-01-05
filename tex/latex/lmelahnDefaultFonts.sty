@@ -1,0 +1,61 @@
+\providecommand{\filename}{lmelahnDefaultFonts}
+\providecommand{\fileversion}{$Revision: 1 $}
+\providecommand{\filedate}{2015/09/28}
+\providecommand{\fileauthor}{$Author: lmelahn $}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Temporary hack to allow fontspec 2.4e to work.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifdefined\suppressfontnotfounderror
+  \expandafter\let\csname xetex_suppressfontnotfounderror:D\endcsname
+    \suppressfontnotfounderror
+\else
+  \expandafter\let\csname xetex_suppressfontnotfounderror:D\endcsname
+  \luatexsuppressfontnotfounderror
+\fi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Go ahead and remove this once a fix has been posted.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NeedsTeXFormat{LaTeX2e}[1995/12/01]
+
+\ProvidesPackage{\filename}[\filedate \fileversion %
+  : What lmelahn usually uses for fonts.]
+
+\RequirePackage{fontspec}
+
+\defaultfontfeatures{Ligatures=TeX, Numbers=OldStyle}
+\setmainfont{Libertine Serif}
+\setsansfont[Scale=MatchLowercase]{Libertine Sans}
+\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+
+\RequirePackage{unicode-math}
+\setmathfont{Libertine Math}
+
+\RequirePackage{polyglossia}
+\setdefaultlanguage[variant=us]{english}
+\setotherlanguage[variant=ancient]{greek}
+
+% The following code substitutes the FreeSerif equivalents
+% of the versicle and responsum glyphs, since Linux Libertine O
+% does not have them.
+
+\newfontfamily{\liturgyFont}{FreeSerif}
+
+\XeTeXinterchartokenstate=1
+
+\newXeTeXintercharclass\responsumSub
+\XeTeXcharclass"211F=\responsumSub
+\XeTeXinterchartoks 0 \responsumSub = {\begingroup\liturgyFont}
+\XeTeXinterchartoks 255 \responsumSub = {\begingroup\liturgyFont}
+\XeTeXinterchartoks \responsumSub 0 = {\endgroup}
+\XeTeXinterchartoks \responsumSub 255 = {\endgroup}
+
+\newXeTeXintercharclass\versicleSub
+\XeTeXcharclass"2123=\versicleSub
+\XeTeXinterchartoks 0 \versicleSub = {\begingroup\liturgyFont}
+\XeTeXinterchartoks 255 \versicleSub = {\begingroup\liturgyFont}
+\XeTeXinterchartoks \versicleSub 0 = {\endgroup}
+\XeTeXinterchartoks \versicleSub 255 = {\endgroup}
+
+\sloppy
