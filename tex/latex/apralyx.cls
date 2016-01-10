@@ -1,25 +1,67 @@
-\newcommand{\filename}{apralyx}
-\newcommand{\fileversion}{$Revision: 0.1 $}
-\newcommand{\filedate}{2014/12/31}
-\newcommand{\fileauthor}{$Author: Louis Melahn, L.C.$}
+\providecommand{\filename}{apralyx}
+\providecommand{\fileversion}{$Revision: 0.1 $}
+\providecommand{\filedate}{2014/12/31}
+\providecommand{\fileauthor}{$Author: Louis Melahn, L.C.$}
+
+% This will allow me to add periods to all the sections.
+\newcommand*{\@addPeriodsToSections}{
+  \setsecnumformat{\addperiod{\csname the##1\endcsname}\quad}
+  \renewcommand{\cftpartaftersnum}{.}
+  \renewcommand{\cftchapteraftersnum}{.}
+  \renewcommand{\cftsectionaftersnum}{.}
+  
+  \@versionSpecificPeriodCommands
+}
+
+\newcommand*{\@versionSpecificPeriodCommands}{}
+\newcommand*{\@versionSpecificSectionFormatting}{}
 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{\filename}[\filedate \fileversion %
-  : Thesis class for the Pontifical Regina Apostolorum %
+  : Base class for the Pontifical Regina Apostolorum %
    Athenaeum, based on memoir]
+
+\newif\ifapralyx@article
+\newif\ifapralyx@thesis
 
 \DeclareOption{12pt}{\PassOptionsToClass{\CurrentOption}{memoir}}
 \DeclareOption{a4paper}{\PassOptionsToClass{\CurrentOption}{memoir}}
 \DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{memoir}}
 \DeclareOption{openany}{\PassOptionsToClass{\CurrentOption}{memoir}}
 \DeclareOption{xetex}{\PassOptionsToClass{\CurrentOption}{memoir}}
+\DeclareOption{addperiods}{}
+\DeclareOption{dontaddperiods}{\renewcommand*{\@addPeriodsToSections}{}}
+\DeclareOption{article}{\apralyx@articletrue\apralyx@thesisfalse}
+\DeclareOption{thesis}{\apralyx@thesistrue\apralyx@articlefalse}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 
 % These are the default options.
-\ExecuteOptions{12pt,a4paper,oneside,openany,xetex,indexfirst}
+\ExecuteOptions{12pt,a4paper,oneside,openany,xetex,indexfirst,addperiods,article}
 
+%Process the options....
 \ProcessOptions\relax
+
+% Define version-specific things.
+% Make sure these follow \ProcessOptions.
+\ifapralyx@article
+  \PassOptionsToClass{article}{memoir}
+  \renewcommand*{\@versionSpecificPeriodCommands}{
+    \renewcommand*{\printchapternum}{\chaptitlefont\thechapter.\quad}
+  }
+  \renewcommand*{\@versionSpecificSectionFormatting}{
+    \counterwithout{section}{chapter}
+    \setsecnumdepth{paragraph}
+    \settocdepth{subsubsection}
+  }
+\fi
+
+\ifapralyx@thesis
+  \renewcommand*{\@versionSpecificPeriodCommands}{}
+  \renewcommand*{\@versionSpecificSectionFormatting}{}
+\fi
+
+
 
 % This will be the class that "inherits" the current class.
 \LoadClass{memoir}
@@ -125,12 +167,6 @@
     \noindent
     \hb@xt@1.8em{\hss\@makefnmark}~#1} % I added the space right here, before #1.
     
-% Fix some numbering issues. Suitable for texts without chapters.
-\setsecnumformat{\csname the#1\endcsname.~}
-\counterwithout{section}{chapter}
-\setsecnumdepth{paragraph}
-\settocdepth{subsubsection}
-
 % Linebreaking and that kind of thing should be sloppy.
 \sloppy
 
@@ -155,6 +191,9 @@
 \let\oldcite\citep
 \let\citep\autocite
 
+% Add periods to sections, as requested by options.
+\@addPeriodsToSections
+
 % The following code makes the regular (unstarred) version of
 % \tableofcontents behave as if it were the starred version.
 % (For whatever reason, I can't figure out how to make LyX use the
@@ -163,3 +202,10 @@
   \@ifstar{\mem@tableofcontents{01}}
           {\mem@tableofcontents{01}}%
 }
+
+% Make sure that chapter numbers reset after parts, and sections after chapters.
+\@addtoreset{chapter}{part}
+\@addtoreset{section}{chapter}
+
+%Sets what gets section numbers.
+\setsecnumdepth{subsection}
