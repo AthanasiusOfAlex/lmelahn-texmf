@@ -51,7 +51,7 @@
   \@versionSpecificPeriodCommands
 }
 
-% A hook for thearticle-based version
+% A hook for the article-based version
 \newcommand*{\@versionSpecificPeriodCommands}{}
 \newcommand*{\@versionSpecificSectionFormatting}{}
 
