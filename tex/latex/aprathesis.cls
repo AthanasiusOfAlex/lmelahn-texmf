@@ -50,6 +50,7 @@
   
   \@versionSpecificPeriodCommands
 }
+\renewcommand\@addPeriodsToSections{}
 
 % A hook for the article-based version
 \newcommand*{\@versionSpecificPeriodCommands}{}
@@ -334,6 +335,11 @@
 \DefineBibliographyExtras{english}{%
   \uspunctuation%
 }
+
+% This means that we will let BibLaTeX, not Memoir, determine which bibliography
+% headings are printed in the table of contents.
+%(Use \bibintoc to switch control back to Memoir.)
+\nobibintoc
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Headers
