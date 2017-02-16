@@ -11,8 +11,12 @@
 % any later version of the LPPL OR (at your option)
 % GPLV3 (https://www.gnu.org/licenses/gpl.html) OR (at your option)
 % any later version of the GPL.
-% Moreover, modified versions of this Work may be FREELY DISTRIBUTED
-% WITHOUT RESTRICTION OR CONDITION.
+% Moreover, no conditions are placed on distributing modified versions.
+% (In particular, you may modify and distribute the work as if you are the
+% Current Maintainer, as defined by the LPPL v. 1.3c or any later version.)
+% If you license your modified work with the LPPL, you may (at your option)
+% also grant this permission in your modified versions, but it is not required
+% for you to do so.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -40,25 +44,10 @@
 % Options
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% This will allow me to add periods to all the sections.
-% I have to put the code here
-\newcommand*{\@addPeriodsToSections}{
-  \setsecnumformat{\addperiod{\csname the##1\endcsname}\quad}
-  \renewcommand{\cftpartaftersnum}{.}
-  \renewcommand{\cftchapteraftersnum}{.}
-  \renewcommand{\cftsectionaftersnum}{.}
-  
-  \@versionSpecificPeriodCommands
-}
-\renewcommand\@addPeriodsToSections{}
-
-% A hook for the article-based version
-\newcommand*{\@versionSpecificPeriodCommands}{}
-\newcommand*{\@versionSpecificSectionFormatting}{}
-
-% Define booleans for using the article-based version
+% Define booleans
 \newbool{isArticle}
 \newbool{isThesis}
+\newbool{addingPeriods}
 
 % The following code will set the desired defaults for the base class,
 % when no options are specified. This class will accept any global option
@@ -75,8 +64,8 @@
 \DeclareOption{12pt}{\PassOptionsToClass{\CurrentOption}{\baseclass}}
 \DeclareOption{oneside}{\PassOptionsToClass{\CurrentOption}{\baseclass}}
 \DeclareOption{openany}{\PassOptionsToClass{\CurrentOption}{\baseclass}}
-\DeclareOption{addperiods}{}
-\DeclareOption{noperiods}{\renewcommand*{\@addPeriodsToSections}{}}
+\DeclareOption{addperiods}{\booltrue{addingPeriods}}
+\DeclareOption{noperiods}{\boolfalse{addingPeriods}}
 \DeclareOption{article}{\booltrue{isArticle}\boolfalse{isThesis}}
 \DeclareOption{thesis}{\boolfalse{isArticle}\booltrue{isThesis}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{\baseclass}}
@@ -89,23 +78,23 @@
 
 % Define version-specific actions.
 % Make sure these follow \ProcessOptions.
-\ifbool{isArticle}{
-    \PassOptionsToClass{article}{memoir}
-    \renewcommand*{\@versionSpecificPeriodCommands}{
-        \renewcommand*{\printchapternum}{\chaptitlefont\thechapter.\quad}
-    }
-}{
-    \renewcommand*{\@versionSpecificSectionFormatting}{
-        \counterwithout{section}{chapter}
-        \setsecnumdepth{paragraph}
-        \settocdepth{subsubsection}
-    }
-}
-
-\ifbool{isThesis}{
-    \renewcommand*{\@versionSpecificPeriodCommands}{}
-    \renewcommand*{\@versionSpecificSectionFormatting}{}
-}{}
+%\ifbool{isArticle}{
+%    \PassOptionsToClass{article}{memoir}
+%    \renewcommand*{\@versionSpecificPeriodCommands}{
+%        \renewcommand*{\printchapternum}{\chaptitlefont\thechapter.\quad}
+%    }
+%}{
+%    \renewcommand*{\@versionSpecificSectionFormatting}{
+%        \counterwithout{section}{chapter}
+%        \setsecnumdepth{paragraph}
+%        \settocdepth{subsubsection}
+%    }
+%}
+%
+%\ifbool{isThesis}{
+%    \renewcommand*{\@versionSpecificPeriodCommands}{}
+%    \renewcommand*{\@versionSpecificSectionFormatting}{}
+%}{}
 
 % Finally, load the base class.
 \LoadClass{\baseclass}
@@ -226,7 +215,6 @@
 
     {
     
-
         \setlength{\parindent}{0pt}
   
         \begin{center}
@@ -301,15 +289,45 @@
 % Heading adjustments
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\@addPeriodsToSections
+% This will allow me to add periods to all the sections.
+\ifbool{addingPeriods}{
+    \renewcommand{\cftpartaftersnum}{.}
+    \renewcommand{\cftchapteraftersnum}{.}
+    \renewcommand{\cftsectionaftersnum}{.}
+    \setsecnumformat{\addperiod{\csname the#1\endcsname}\quad}
+    
+    %Sets what gets section numbers. 
+    %By default, this is set at the level of the subsection, but it can be set in the document.
+    %\counterwithout{section}{chapter}
+    \setsecnumdepth{subsection}
+    \settocdepth{subsection}
+        
+}{}
+
+% We will modify the chapter style for theses.
+\ifbool{isThesis}{
+
+    \makechapterstyle{apra}{%
+        \renewcommand*{\printchaptername}{}
+        \renewcommand*\chapterheadstart{}
+        \renewcommand*{\chapternamenum}{}
+        \renewcommand*{\chapnumfont}{\chaptitlefont}
+        \renewcommand*{\printchapternum}{\chapnumfont \thechapter.\space}
+        \renewcommand*{\afterchapternum}{}
+        \renewcommand{\printchaptertitle}[1]{\centering\LARGE\MakeUppercase{##1}}%
+    }
+    
+    \chapterstyle{apra}%
+    
+    %Sets what gets section numbers. 
+    %By default, this is set at the level of the subsubsection, but it can be set in the document.
+    \setsecnumdepth{subsubsection}
+    
+ }{}
 
 % Make sure that chapter numbers reset after parts, and sections after chapters.
 \@addtoreset{chapter}{part}
 \@addtoreset{section}{chapter}
-
-%Sets what gets section numbers. 
-%By default, this is set at the level of the subsection, but it can be set in the document.
-\setsecnumdepth{subsection}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Language
@@ -329,7 +347,9 @@
 
 % We will use biblates. We will use natbib, so as to make it easy to
 % integrate with LyX.
-\RequirePackage[style=apra,natbib=true,backend=biber]{biblatex}
+\RequirePackage[style=apra,natbib=true,citepages=omit]{biblatex}
+
+\ExecuteBibliographyOptions{firstinits=true}
 
 % Specifies U.S.-style punctuation in citations.
 \DefineBibliographyExtras{english}{%
@@ -359,3 +379,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage{environ}
 
+%Widow and orphan control!
+\clubpenalty=10000
+\widowpenalty=10000

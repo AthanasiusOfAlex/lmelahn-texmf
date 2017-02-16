@@ -8,8 +8,12 @@
 % any later version of the LPPL OR (at your option)
 % GPLV3 (https://www.gnu.org/licenses/gpl.html) OR (at your option)
 % any later version of the GPL.
-% Moreover, modified versions of this Work may be FREELY DISTRIBUTED
-% WITHOUT RESTRICTION OR CONDITION.
+% Moreover, no conditions are placed on distributing modified versions.
+% (In particular, you may modify and distribute the work as if you are the
+% Current Maintainer, as defined by the LPPL v. 1.3c or any later version.)
+% If you license your modified work with the LPPL, you may (at your option)
+% also grant this permission in your modified versions, but it is not required
+% for you to do so.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -28,7 +32,11 @@
 \defaultfontfeatures{Ligatures=TeX, Numbers=OldStyle}
 \setmainfont{Libertinus Serif}
 \setsansfont[Scale=MatchLowercase]{Libertinus Sans}
-\setmonofont[Scale=MatchLowercase]{DejaVu Sans Mono}
+\setmonofont[Scale=MatchLowercase]{Libertinus Mono}
+
+% Make URL use roman (serif), not monospaced, type.
+%\renewcommand\UrlFont{\rmfamily}
+\urlstyle{rm}
 
 \RequirePackage{unicode-math}
 \setmathfont{Libertinus Math}
@@ -43,18 +51,24 @@
 
 \newfontfamily{\liturgyFont}{FreeSerif}
 
-\XeTeXinterchartokenstate=1
+\RequirePackage{ifxetex}
 
-\newXeTeXintercharclass\responsumSub
-\XeTeXcharclass"211F=\responsumSub
-\XeTeXinterchartoks 0 \responsumSub = {\begingroup\liturgyFont}
-\XeTeXinterchartoks 255 \responsumSub = {\begingroup\liturgyFont}
-\XeTeXinterchartoks \responsumSub 0 = {\endgroup}
-\XeTeXinterchartoks \responsumSub 255 = {\endgroup}
+\ifxetex{
 
-\newXeTeXintercharclass\versicleSub
-\XeTeXcharclass"2123=\versicleSub
-\XeTeXinterchartoks 0 \versicleSub = {\begingroup\liturgyFont}
-\XeTeXinterchartoks 255 \versicleSub = {\begingroup\liturgyFont}
-\XeTeXinterchartoks \versicleSub 0 = {\endgroup}
-\XeTeXinterchartoks \versicleSub 255 = {\endgroup}
+    \XeTeXinterchartokenstate=1
+    
+    \newXeTeXintercharclass\responsumSub
+    \XeTeXcharclass"211F=\responsumSub
+    \XeTeXinterchartoks 0 \responsumSub = {\begingroup\liturgyFont}
+    \XeTeXinterchartoks 255 \responsumSub = {\begingroup\liturgyFont}
+    \XeTeXinterchartoks \responsumSub 0 = {\endgroup}
+    \XeTeXinterchartoks \responsumSub 255 = {\endgroup}
+    
+    \newXeTeXintercharclass\versicleSub
+    \XeTeXcharclass"2123=\versicleSub
+    \XeTeXinterchartoks 0 \versicleSub = {\begingroup\liturgyFont}
+    \XeTeXinterchartoks 255 \versicleSub = {\begingroup\liturgyFont}
+    \XeTeXinterchartoks \versicleSub 0 = {\endgroup}
+    \XeTeXinterchartoks \versicleSub 255 = {\endgroup}
+
+} \else \fi
