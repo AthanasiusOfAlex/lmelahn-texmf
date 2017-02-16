@@ -76,10 +76,12 @@
 % Now, process the options.
 \ProcessOptions\relax
 
-% Define version-specific actions.
+% Options to bass to memoir, based on the options given.
 % Make sure these follow \ProcessOptions.
-%\ifbool{isArticle}{
-%    \PassOptionsToClass{article}{memoir}
+\ifbool{isArticle}{
+    \PassOptionsToClass{article}{memoir}
+}
+
 %    \renewcommand*{\@versionSpecificPeriodCommands}{
 %        \renewcommand*{\printchapternum}{\chaptitlefont\thechapter.\quad}
 %    }
