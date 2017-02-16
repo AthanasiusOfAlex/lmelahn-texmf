@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% APRA Thesis Tamplate
+% APRA Thesis Template
 % Class File
 %
 % Authors:
