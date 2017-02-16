@@ -1,6 +1,27 @@
+% !TEX encoding = UTF-8 Unicode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% APRA Thesis Template for LyX
+% Class File
+%
+% Authors:
+% Louis Melahn, L.C.
+%
+% Class license:
+% LPPL v1.3c (http://www.latex-project.org/lppl) OR (at your option)
+% any later version of the LPPL OR (at your option)
+% GPLV3 (https://www.gnu.org/licenses/gpl.html) OR (at your option)
+% any later version of the GPL.
+% Moreover, no conditions are placed on distributing modified versions.
+% (In particular, you may modify and distribute the work as if you are the
+% Current Maintainer, as defined by the LPPL v. 1.3c or any later version.)
+% If you license your modified work with the LPPL, you may (at your option)
+% also grant this permission in your modified versions, but it is not required
+% for you to do so.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \providecommand{\filename}{apralyx}
-\providecommand{\fileversion}{$Revision: 0.1 $}
-\providecommand{\filedate}{2014/12/31}
+\providecommand{\fileversion}{$Revision: 0.2 $}
+\providecommand{\filedate}{2017/02/17}
 \providecommand{\fileauthor}{$Author: Louis Melahn, L.C.$}
 
 % This will allow me to add periods to all the sections.
