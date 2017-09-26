@@ -297,13 +297,15 @@
     \renewcommand{\cftchapteraftersnum}{.}
     \renewcommand{\cftsectionaftersnum}{.}
     \setsecnumformat{\addperiod{\csname the#1\endcsname}\quad}
-    
+          
+}{}
+
+% We will modify the chapter style for articles.
+\ifbool{isArticle}{
     %Sets what gets section numbers. 
-    %By default, this is set at the level of the subsection, but it can be set in the document.
-    %\counterwithout{section}{chapter}
-    \setsecnumdepth{subsection}
+    %By default, this is set at the level of the subsubsection, but it can be set in the document.
+    \setsecnumdepth{subsubsection}
     \settocdepth{subsection}
-        
 }{}
 
 % We will modify the chapter style for theses.
@@ -324,7 +326,8 @@
     %Sets what gets section numbers. 
     %By default, this is set at the level of the subsubsection, but it can be set in the document.
     \setsecnumdepth{subsubsection}
-    
+    \settocdepth{subsection}
+
  }{}
 
 % Make sure that chapter numbers reset after parts, and sections after chapters.

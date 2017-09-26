@@ -10,11 +10,12 @@
 
 \pointpoints{punto}{punti}
 
-\RequirePackage{fontspec}
-\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
-\setsansfont[Mapping=tex-text]{Linux Biolinum O}
-\setmonofont{Linux Libertine O}
+%\RequirePackage{fontspec}
+%\setmainfont[Mapping=tex-text,Numbers=OldStyle]{Linux Libertine O}
+%\setsansfont[Mapping=tex-text]{Linux Biolinum O}
+%\setmonofont{Linux Libertine O}
 
+\RequirePackage{lmelahnDefaultFonts}
 
 \RequirePackage{environ}
 \RequirePackage{etoolbox}
@@ -99,3 +100,23 @@
 
 %\printanswers
 \noprintanswers
+
+\NewEnviron{EnglishText}{}
+\NewEnviron{ItalianText}{}
+
+
+\newcommand*{\useEnglish}{%
+    \DeclareDocumentCommand\englishText{m}{##1}%
+    \DeclareDocumentCommand\italianText{m}{}%
+    \RenewEnviron{EnglishText}{\BODY}%
+    \RenewEnviron{ItalianText}{}%
+}
+
+\newcommand*{\useItalian}{%
+    \DeclareDocumentCommand\italianText{m}{##1}%
+    \DeclareDocumentCommand\englishText{m}{}%
+    \RenewEnviron{ItalianText}{\BODY}%
+    \RenewEnviron{EnglishText}{}%
+}
+
+\useItalian
