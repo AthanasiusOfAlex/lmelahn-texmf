@@ -120,3 +120,11 @@
 }
 
 \useItalian
+
+\newcommand{\markedAnswer}[1]{%
+	\ifdef{\PRINTMYANSWERS}{%
+		{\fbox{#1}}%
+	}{%
+		#1%
+	}%
+}
