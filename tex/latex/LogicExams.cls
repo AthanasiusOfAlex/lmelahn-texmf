@@ -80,6 +80,10 @@
   \hrulefill\par
 }
 
+\DeclareDocumentCommand \markAnswer { m }{%
+  \ifdef{\PRINTMYANSWERS}{\fbox{#1}}{#1}%
+}
+
 \makeatother
 
 \newcommand*{\questionDef}[1]{\question\textbf{#1}: }
