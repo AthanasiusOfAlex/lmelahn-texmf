@@ -350,9 +350,9 @@
 % Bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% We will use biblates. We will use natbib, so as to make it easy to
+% We will use biblatex. We will use natbib, so as to make it easy to
 % integrate with LyX.
-\RequirePackage[style=apra,natbib=true,citepages=omit]{biblatex}
+\RequirePackage[style=apra,natbib=true,citepages=omit,ibidpage=true]{biblatex}
 
 \ExecuteBibliographyOptions{firstinits=true}
 
