@@ -9,7 +9,7 @@
 
 % This formats the edition as a simple superscript. 
 % It omits the edition altogether if it is the first.
-\DeclareFieldFormat{edition}{\ifnum#1>1 \textsuperscript{#1}\fi}
+\DeclareFieldFormat{edition}{\ifnumeral{#1}{\ifnum#1>1 \textsuperscript{#1}\fi}{\textsuperscript{#1}}}
 
 % Make sure "p." and "pp." never appear anywhere.
 \DeclareFieldFormat{postnote}{#1}
