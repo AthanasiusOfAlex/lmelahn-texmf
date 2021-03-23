@@ -352,7 +352,13 @@
 
 % We will use biblatex. We will use natbib, so as to make it easy to
 % integrate with LyX.
-\RequirePackage[style=apra,natbib=true,citepages=omit,ibidpage=true]{biblatex}
+\RequirePackage[
+	style=apra,
+	natbib=true,
+	citepages=omit,
+	ibidpage=true,         % necessary so that ibid. will work if the same work is cited but just the pages are different.
+	loccittracker=context  % necessary in order for ibid to work even when the pages are not numerical.
+]{biblatex}
 
 \ExecuteBibliographyOptions{firstinits=true}
 
