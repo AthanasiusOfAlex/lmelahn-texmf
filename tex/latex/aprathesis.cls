@@ -268,12 +268,13 @@
 \renewcommand*{\footnotesize}{\fontsize{11}{13.3}\selectfont}
 
 % Set the footnote rule to 5cm, as required by APRA's rules (code taken from latex.dtx).
-\def\footnoterule{\vrule height 12pt depth 0pt width 0pt%
+\renewcommand*\footnoterule{%
+	\vrule height 12pt depth 0pt width 0pt%
                             % Add a 12-pt-high,0-width vertical line to
                             % separate the rule line from the body text.
-  \kern-3\p@
-  \hrule \@width 5cm \kern 2.6\p@%% the \hrule is .4pt high
-  \vrule height 0pt depth 6pt width 0pt%
+	\kern-3\p@
+	\hrule \@width 5cm \kern 2.6\p@%% the \hrule is .4pt high
+	\vrule height 0pt depth 6pt width 0pt%
                             % Add a 6-pt-high,0-width vertical line to
                             % separate the rule line from the footnote
                             % text.
