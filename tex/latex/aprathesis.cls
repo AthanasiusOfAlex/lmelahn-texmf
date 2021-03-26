@@ -213,7 +213,7 @@
 
     \thispagestyle{empty}
     
-    \newgeometry{top=2.5cm, bottom=2.5cm, left=3.5cm, right=2.5cm}
+    \newgeometry{top=3cm, bottom=5cm, left=4cm, right=3cm}
 
     {
     
